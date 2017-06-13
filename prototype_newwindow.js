@@ -4888,16 +4888,20 @@ function run() {
         
         if (result) {
             var description = $$("#descriptionmodule #description-val")[0];
+            var type = getHTMLInnerText($$("#stalker #key-val")[0]);
 
-	    if (description != undefined) {
-		description = getHTMLInnerText(description);
-	    }
+            if (description != undefined) {
+                description = getHTMLInnerText(description);
+            }
 
             var url = 'https://trac.neuland-bfi.de/bonprix/newticket';
             url = url + "?";
             url = url + "&summary=" + headline;
             url = url + "&description=" + window.location.href + " [[BR]] " + description ;
-            
+            if(type != undefined && type.startsWith("PI-")) {
+                url = url + "&type=P%26I-Ticket";
+            }
+
             window.open(url);
         }
     }
